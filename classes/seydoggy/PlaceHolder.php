@@ -164,6 +164,7 @@ class PlaceHolder extends \seydoggy\SimpleImage
 		}
 
 		if (isset($_GET['parameter'])) {
+			echo $_GET['parameter'];
 
 			$this->parameters = explode('-',$_GET['parameter']);
 
@@ -195,8 +196,10 @@ class PlaceHolder extends \seydoggy\SimpleImage
 						die($this->showMessage('min'));
 
 					}
+				} elseif ($this->parameters[0] == 'list') {
+					$this->listImages();
 			    } else {
-
+				    
 			    	die($this->showMessage('nan'));
 
 			    }
@@ -224,6 +227,48 @@ class PlaceHolder extends \seydoggy\SimpleImage
 
 			die($this->showMessage('param'));
 
+		}
+	}
+	
+	private function listImages() {
+		/**
+		 * check to see if the cache file exists
+		 */
+		$this->cacheFile = $this->imageFolder.'/_images.cache';
+
+		if (file_exists($this->cacheFile)) {
+			$stats = stat($this->cacheFile);
+
+			/**
+			 * compare cache file mod time with current time
+			 */
+			if ($stats[9] > (time() - ((60 * 60) * $this->cacheHours))) {
+				
+				/**
+				 * get json data from cache file
+				 */
+				$jsondata = file_get_contents($this->cacheFile);
+				
+				/**
+				 * make images array from json data
+				 */
+				$this->images = json_decode($jsondata, true);
+
+			} else {
+
+				$this->imageCache();
+
+			}
+
+		} else {
+			
+			$this->imageCache();
+
+		}
+		
+		foreach ($this->images as $image) {
+			$this->load($this->imageFolder.$this->image);
+			echo $image->get_width();
 		}
 	}
 
