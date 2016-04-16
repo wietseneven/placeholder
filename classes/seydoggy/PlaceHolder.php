@@ -164,7 +164,6 @@ class PlaceHolder extends \seydoggy\SimpleImage
 		}
 
 		if (isset($_GET['parameter'])) {
-			var_dump($_GET['parameter']);
 
 			$this->parameters = explode('-',$_GET['parameter']);
 
