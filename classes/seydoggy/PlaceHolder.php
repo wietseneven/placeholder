@@ -166,6 +166,8 @@ class PlaceHolder extends \seydoggy\SimpleImage
 		if (isset($_GET['parameter'])) {
 
 			$this->parameters = explode('-',$_GET['parameter']);
+			
+			$this->parameters[0] = str_replace("/shitholder/", "", $this->parameters[0]);
 
 		    if (is_array($this->parameters) && count($this->parameters) >= 1){
 				
