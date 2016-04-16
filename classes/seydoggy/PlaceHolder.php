@@ -461,13 +461,13 @@ class PlaceHolder extends \seydoggy\SimpleImage
 	{
 		switch ($message) {
 			case 'path':
-				echo "Sorry Dave, I cannot find or write to the images folder with the path:
+				echo "Sorry shithead, I cannot find or write to the images folder with the path:
 						<p>\"$this->imageFolder\".
 						<p>Please check your spelling and/or permissions and try again.";
 				break;
 			
 			case 'param':
-				echo "<p>Sorry Dave, I can't do that.";
+				echo "<p>Sorry shithead, I can't do that.";
 				
 				$this->showFormat();
 
